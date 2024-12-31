@@ -1,7 +1,7 @@
 # --- For-Bot-Working --------- #
 git+https://github.com/KurimuzonAkuma/pyrogram
 TgCrypto
-https://github.com/usernein/pyromod
+pyromod
 # --- For-Database ------------ #
 pymongo
 dnspython
