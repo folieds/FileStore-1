@@ -81,37 +81,25 @@ class Bot(Client):
             sys.exit()
 
         self.set_parse_mode(ParseMode.HTML)
-        self.LOGGER(__name__).info(f"Bot Running..!\n\nCreated by \nhttps://t.me/Animes_X_Hunters")
-        self.LOGGER(__name__).info(f""" \n\n       
+        self.LOGGER(name).info(f"Bot Running..! Made by @rohit_1888")   
 
-  _____ ____  _____  ______ ______ _      _______   ______   ____ _______ _____ 
- / ____/ __ \|  __ \|  ____|  ____| |    |_   _\ \ / /  _ \ / __ \__   __/ ____|
-| |   | |  | | |  | | |__  | |__  | |      | |  \ V /| |_) | |  | | | | | (___  
-| |   | |  | | |  | |  __| |  __| | |      | |   > < |  _ <| |  | | | |  \___ \ 
-| |___| |__| | |__| | |____| |    | |____ _| |_ / . \| |_) | |__| | | |  ____) |
- \_____\____/|_____/|______|_|    |______|_____/_/ \_\____/ \____/  |_| |_____/ 
-                                                                                
-                                                                                
-                                          """)
-        self.username = usr_bot_me.username
-        #web-response
+        # Start Web Server
         app = web.AppRunner(await web_server())
         await app.setup()
-        bind_address = "0.0.0.0"
-        await web.TCPSite(app, bind_address, PORT).start()
+        await web.TCPSite(app, "0.0.0.0", PORT).start()
 
     async def stop(self, *args):
         await super().stop()
-        self.LOGGER(__name__).info("Bot stopped.")
+        self.LOGGER(name).info("Bot stopped.")
 
-def run(self):
+    def run(self):
         """Run the bot."""
         loop = asyncio.get_event_loop()
         loop.run_until_complete(self.start())
-        self.LOGGER(__name__).info("Bot is now running. Thanks to @rohit_1888")
+        self.LOGGER(name).info("Bot is now running. Thanks to @rohit_1888")
         try:
             loop.run_forever()
         except KeyboardInterrupt:
-            self.LOGGER(__name__).info("Shutting down...")
+            self.LOGGER(name).info("Shutting down...")
         finally:
             loop.run_until_complete(self.stop())
