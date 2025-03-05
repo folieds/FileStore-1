@@ -7,6 +7,7 @@ import random
 import sys
 import time
 import string
+import subprocess
 import string as rohit
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
@@ -185,7 +186,8 @@ async def start_command(client: Client, message: Message):
                 mention=message.from_user.mention,
                 id=message.from_user.id
             ),
-            reply_markup=reply_markup#,
+            reply_markup=reply_markup
+            
             #message_effect_id=5104841245755180586  # 🔥
         )
         return
@@ -239,7 +241,7 @@ async def not_joined(client: Client, message: Message):
     try:
         buttons.append([
             InlineKeyboardButton(
-                text="ʀᴇʟᴏᴀᴅ",
+                text="♻️ ʀᴇʟᴏᴀᴅ ♻️",
                 url=f"https://t.me/{client.username}?start={message.command[1]}"
             )
         ])
@@ -262,7 +264,7 @@ async def not_joined(client: Client, message: Message):
 
 #=====================================================================================##
 
-WAIT_MSG = "<b>Working....</b>"
+WAIT_MSG = "<b>Working....⚡</b>"
 
 REPLY_ERROR = "<code>Use this command as a reply to any telegram message without any spaces.</code>"
 
@@ -320,3 +322,23 @@ Unsuccessful: <code>{unsuccessful}</code></b>"""
         msg = await message.reply(REPLY_ERROR)
         await asyncio.sleep(8)
         await msg.delete()
+
+#=====================================================================================##
+#......... RESTART COMMAND FOR RESTARTING BOT .......#
+#=====================================================================================##
+
+@Bot.on_message(filters.command('restart') & filters.private & filters.user(OWNER_ID))
+async def restart_bot(client: Client, message: Message):
+    print("Restarting bot...")
+    msg = await message.reply(text=f"<b><i><blockquote>⚠️ {client.name} ɢᴏɪɴɢ ᴛᴏ Rᴇsᴛᴀʀᴛ...</blockquote></i></b>")
+    try:
+        await asyncio.sleep(6)  # Wait for 6 seconds before restarting
+        await msg.delete()
+        args = [sys.executable, "main.py"]  # Adjust this if your start file is named differently
+        os.execl(sys.executable, *args)
+    except Exception as e:
+        print(f"Error occured while Restarting the bot: {e}")
+        return await msg.edit_text(f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @metaUi</i></b>\n<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>")
+    # Optionally, you can add cleanup tasks here
+    #subprocess.Popen([sys.executable, "main.py"])  # Adjust this if your start file is named differently
+    #sys.exit()
